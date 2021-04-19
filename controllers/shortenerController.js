@@ -20,26 +20,27 @@ module.exports = {
   checkOriginalUrl: (req, res, next) => {
     Shortener.findOne({url: req.body.url})
              .then(shortener => {
-               console.log("2: " + convertFieldsForFCC(shortener));
+               // console.log("2: " + convertFieldsForFCC(shortener));
                if(shortener) {
                  res.json(convertFieldsForFCC(shortener));
                } else {
                  next();
                }
              })
-             .catch(err => res.status(422).json(err));
+             .catch(err => next());
   },
   createShortener: (req, res) => {
     const newShortener = {
       url: req.body.url
     };
-    console.log("3: " + newShortener);
+    // console.log("3: " + newShortener);
     Shortener.create(newShortener)
              .then(newShortener => res.json(convertFieldsForFCC(newShortener)))
-             .catch(err => res.status(422).json(err));
+             .catch(err => res.status(422).json("Error: Creation unsuccessful!"));
   },
   validateUrl: (req, res, next) => {
-    if(validUrl.isUri(req.body.url)) {
+    // console.log("1: " + req.body.url);
+    if(validUrl.isWebUri(req.body.url)) {
       next();
     } else {
       res.json({error: "invalid url"});
@@ -48,13 +49,13 @@ module.exports = {
   findOneByShortUrl: (req, res) => {
     Shortener.findById(req.params.uuid)
              .then(shortener => {
-               console.log("4: " + req.params.uuid);
+               // console.log("4: " + req.params.uuid);
                if(shortener) {
                  res.redirect(shortener.url);
                } else {
                  res.redirect('/');
                }
              })
-             .catch(err => res.status(422).json(err));
+             .catch(err => res.redirect("/"));
   }
 }
