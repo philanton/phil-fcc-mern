@@ -20,6 +20,7 @@ module.exports = {
   checkOriginalUrl: (req, res, next) => {
     Shortener.findOne({url: req.body.url})
              .then(shortener => {
+               console.log("2: " + convertFieldsForFCC(shortener));
                if(shortener) {
                  res.json(convertFieldsForFCC(shortener));
                } else {
@@ -32,13 +33,14 @@ module.exports = {
     const newShortener = {
       url: req.body.url
     };
-
+    console.log("3: " + newShortener);
     Shortener.create(newShortener)
              .then(newShortener => res.json(convertFieldsForFCC(newShortener)))
              .catch(err => res.status(422).json(err));
   },
   validateUrl: (req, res, next) => {
     dns.lookup(req.body.url, (err, addr, family) => {
+      console.log("1: " + req.body.url);
       if(addr === undefined) {
         res.json({error: "invalid url"});
       } else {
@@ -49,6 +51,7 @@ module.exports = {
   findOneByShortUrl: (req, res) => {
     Shortener.findById(req.params.uuid)
              .then(shortener => {
+               console.log("4: " + req.params.uuid);
                if(shortener) {
                  res.redirect(shortener.url);
                } else {
