@@ -1,5 +1,5 @@
 const Shortener = require('../models/Shorteners');
-const dns = require('dns');
+const validUrl = require('valid-url');
 
 function convertToOtherNames(names, obj) {
   const new_obj = {};
@@ -39,14 +39,11 @@ module.exports = {
              .catch(err => res.status(422).json(err));
   },
   validateUrl: (req, res, next) => {
-    dns.lookup(req.body.url, (err, addr, family) => {
-      console.log("1: " + req.body.url + "|" + err + "|" + addr + "|" + family);
-      if(addr === undefined) {
-        res.json({error: "invalid url"});
-      } else {
-        next();
-      }
-    });
+    if(validUrl.isUri(req.body.url)) {
+      next();
+    } else {
+      res.json({error: "invalid url"});
+    }
   },
   findOneByShortUrl: (req, res) => {
     Shortener.findById(req.params.uuid)

@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.12.4",
-    "nanoid": "git+https://github.com/ai/nanoid.git"
+    "nanoid": "git+https://github.com/ai/nanoid.git",
+    "valid-url": "^1.0.9"
   },
   "repository": {}
 }
