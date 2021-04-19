@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-api.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
