@@ -3,7 +3,6 @@ const shortenerController = require('../controllers/shortenerController');
 
 
 router.route('/')
-      .post(shortenerController.validateUrl)
       .post(shortenerController.checkOriginalUrl)
       .post(shortenerController.createShortener);
 
