@@ -40,7 +40,7 @@ module.exports = {
   },
   validateUrl: (req, res, next) => {
     dns.lookup(req.body.url, (err, addr, family) => {
-      console.log("1: " + req.body.url);
+      console.log("1: " + req.body.url + "|" + err + "|" + addr + "|" + family);
       if(addr === undefined) {
         res.json({error: "invalid url"});
       } else {
