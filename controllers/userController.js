@@ -7,7 +7,7 @@ module.exports = {
         .catch(() => next());
   },
   findUser: (req, res, next) => {
-    User.findById({username: req.params._id})
+    User.findById(req.params._id)
         .then(() => next())
         .catch(() => res.json({error: "No user with provided username!"}));
   },
@@ -42,7 +42,7 @@ module.exports = {
 
           if(req.query.limit) user.log = user.log.slice(0, req.query.limit);
           user.count = user.log.length;
-          
+
           res.json(user);
         })
         .catch(err => res.status(422).json(err));
