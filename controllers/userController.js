@@ -26,8 +26,17 @@ module.exports = {
       req.params._id,
       {$push: {log: req.body}, $inc: {count: 1}},
       {new: true}
-    ).then(user => res.json(user))
-     .catch(err => res.status(422).json(err));
+    ).lean().then(user => {
+      const { username, _id, count, log} = user;
+      return res.json({
+        username,
+        _id,
+        count,
+        description: log[log.length - 1].description,
+        duration: log[log.length - 1].duration,
+        date: log[log.length - 1].date
+      });
+    }).catch(err => res.status(422).json(err));
   },
   getLogs: (req, res) => {
     User.findById(req.params._id)
