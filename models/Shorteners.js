@@ -13,6 +13,6 @@ const shortenerSchema = new Schema({
   }
 });
 
-const Shortener = mongoose.model('Shortener', shortenerSchema);
+const Shortener = mongoose.model('Shortener', shortenerSchema, 'shorteners');
 
 module.exports = Shortener;

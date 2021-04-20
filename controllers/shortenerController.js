@@ -30,11 +30,8 @@ module.exports = {
              .catch(err => next());
   },
   createShortener: (req, res) => {
-    const newShortener = {
-      url: req.body.url
-    };
     // console.log("3: " + newShortener);
-    Shortener.create(newShortener)
+    Shortener.create({ url: req.body.url })
              .then(newShortener => res.json(convertFieldsForFCC(newShortener)))
              .catch(err => res.status(422).json("Error: Creation unsuccessful!"));
   },
