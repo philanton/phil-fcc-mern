@@ -31,10 +31,9 @@ module.exports = {
       return res.json({
         username,
         _id,
-        count,
         description: log[log.length - 1].description,
         duration: log[log.length - 1].duration,
-        date: log[log.length - 1].date
+        date: log[log.length - 1].date.toDateString()
       });
     }).catch(err => res.status(422).json(err));
   },
