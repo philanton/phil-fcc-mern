@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 const { URLShortener } = require('./components/URLShortener');
+const { FileUploader } = require('./components/FileUploader');
 const { Main } = require('./components/Main');
 
 function App() {
@@ -15,11 +16,8 @@ function App() {
           <Route exact path="/short">
             <URLShortener className="App-section"/>
           </Route>
-          <Route path="/">
-            <URLShortener className="App-section"/>
-          </Route>
-          <Route path="/">
-            <URLShortener className="App-section"/>
+          <Route exact path="/file">
+            <FileUploader className="App-section"/>
           </Route>
         </Switch>
       </div>
