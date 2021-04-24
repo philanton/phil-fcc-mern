@@ -13,9 +13,6 @@ function App() {
           <Route exact path="/">
             <FileUploader className="App-section"/>
           </Route>
-          <Route exact path="/p">
-            <Main className="Main"/>
-          </Route>
           <Route exact path="/short">
             <URLShortener className="App-section"/>
           </Route>
