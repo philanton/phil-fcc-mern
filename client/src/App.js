@@ -10,13 +10,13 @@ function App() {
       <div id="App">
         <h1>Front-End to interact with Microservices</h1>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/p">
             <Main className="Main"/>
           </Route>
           <Route exact path="/short">
             <URLShortener className="App-section"/>
           </Route>
-          <Route exact path="/file">
+          <Route exact path="/">
             <FileUploader className="App-section"/>
           </Route>
         </Switch>

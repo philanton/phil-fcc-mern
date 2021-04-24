@@ -6,7 +6,7 @@ const path = require('path');
 
 router.use('/api/shorturl', shortenerRoutes);
 router.use('/api/users', userRoutes);
-router.use('/api/file_info', fileRoutes);
+router.use('/api/fileanalyse', fileRoutes);
 
 router.use((req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
