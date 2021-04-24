@@ -9,7 +9,7 @@ router.use('/api/users', userRoutes);
 router.use('/api/fileanalyse', fileRoutes);
 
 router.use((req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 module.exports = router;
