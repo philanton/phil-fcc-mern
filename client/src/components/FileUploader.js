@@ -1,26 +1,32 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, ErrorMessage } from 'formik';
 
-const schema = Yup.object().shape({
-  file: Yup.mixed().required("Please, choose file!")
-});
+import { getFileInfo } from '../utils/API';
+
 
 export const FileUploader = ({ className }) => (
   <div className={className}>
   <h2>File Uploader</h2>
   <p>Here you can enter upload file and get its info.</p>
     <Formik
-      initialValues={{ file: null }}
+      initialValues={{ upfile: null }}
       onSubmit={(values) => {
-        console.log("Sending API request..")
+        const formData = new FormData();
+        formData.append('upfile', values.upfile);
+
+        getFileInfo(formData).then(res => {
+          console.log("INFO: ", res.data);
+        }).catch(err => console.log(err))
       }}
-      validationSchema={schema}
     >
-      {({ handleSubmit, values}) => (
+      {({ handleSubmit, values, setFieldValue}) => (
         <Form onSubmit={handleSubmit}>
-          <Field type="file" name="file"/>
-          <ErrorMessage name="file"/>
+          <input
+            type="file"
+            name="upfile"
+            onChange={(event) => {setFieldValue("upfile", event.currentTarget.files[0])}}
+          />
+          <ErrorMessage name="upfile"/>
           <button type="submit">Get info</button>
         </Form>
       )}
